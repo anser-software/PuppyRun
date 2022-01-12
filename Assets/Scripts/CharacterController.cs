@@ -10,7 +10,7 @@ public class CharacterController : MonoBehaviour
     public static CharacterController instance { get; private set; }
 
     [SerializeField]
-    private float defaultSpeed, rotationAngle, rotationSpeed;
+    private float defaultSpeed, rotationAngle, rotationSpeed, centeringForce;
 
     private Rigidbody rb;
 
@@ -19,6 +19,8 @@ public class CharacterController : MonoBehaviour
     private float speed;
 
     private Vector3 targetScale;
+
+    private Transform bone;
 
     private void Awake()
     {
@@ -33,6 +35,8 @@ public class CharacterController : MonoBehaviour
 
         targetScale = transform.localScale;
 
+        bone = FindObjectOfType<Bone>().transform;
+
         moveVector = Vector3.forward * speed;
     }
 
@@ -41,18 +45,25 @@ public class CharacterController : MonoBehaviour
         Move();
 
         FaceMoveDirection();
+
+        CheckDistance();
     }
 
     private void Move()
     {
-        if (Input.GetMouseButton(0))
-        {
-            var moveDirectionOffset = (Mathf.Clamp01(InputManager.Instance.mouseViewportPosition.x) - 0.5F) * 2F;
+        var centeringVector = (CrowdManager.instance.furthestPos - transform.position) * centeringForce;
 
-            moveVector = Quaternion.AngleAxis(moveDirectionOffset * rotationAngle, Vector3.up) * Vector3.forward * speed;
-        }
+        moveVector = (bone.position - transform.position).normalized * speed + centeringVector;
 
         rb.velocity = Vector3.Lerp(rb.velocity, moveVector, Time.deltaTime * rotationSpeed);
+    }
+
+    private void CheckDistance()
+    {
+        if((CrowdManager.instance.furthestPos - transform.position).magnitude > CrowdManager.instance.maxDistanceToFurthest)
+        {
+            CrowdManager.instance.RemoveCharacter(this);
+        }
     }
 
     public void MultiplySpeed(float value, float changeDuration)

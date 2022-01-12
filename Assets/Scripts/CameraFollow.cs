@@ -23,7 +23,12 @@ public class CameraFollow : MonoBehaviour
     private void FixedUpdate()
     {
         overdo = Vector3.Lerp(overdo, target.velocity * overdoMagnitude, Time.deltaTime * overdoAcceleration);
-        var targetPos =  target.position + overdo + offset;
+        //var targetPos =  target.position + overdo + offset;
+
+        overdo.x = 0F;
+
+        var targetPos = new Vector3(0F, offset.y, CrowdManager.instance.furthestPos.z + offset.z) + overdo;
+
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
     }
 
