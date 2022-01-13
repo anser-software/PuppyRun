@@ -25,9 +25,9 @@ public class CharacterController : MonoBehaviour
 
     private float targetSpeed;
 
-    private Vector3 prevPos;
+    //private Vector3 prevPos;
 
-    private float speedTimer = 0.5F;
+    //private float speedTimer = 0.5F;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class CharacterController : MonoBehaviour
 
         moveVector = Vector3.forward * speed;
 
-        prevPos = transform.position;
+        //prevPos = transform.position;
     }
 
     private void FixedUpdate()
@@ -56,7 +56,7 @@ public class CharacterController : MonoBehaviour
         CheckDistance();
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (speedTimer <= 0F)
         {
@@ -71,7 +71,7 @@ public class CharacterController : MonoBehaviour
         {
             speedTimer -= Time.deltaTime;
         }
-    }
+    }*/
 
     private void Move()
     {

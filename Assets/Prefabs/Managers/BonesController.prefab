@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7079559313967590543
+--- !u!1 &4690919179914283060
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 327911253464912680}
-  - component: {fileID: 3111102023941892080}
+  - component: {fileID: 4690919179914283058}
+  - component: {fileID: 4690919179914283061}
   m_Layer: 0
-  m_Name: CrowdManager
+  m_Name: BonesController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &327911253464912680
+--- !u!4 &4690919179914283058
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079559313967590543}
+  m_GameObject: {fileID: 4690919179914283060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000000059604645, y: 1, z: 1.9999999}
+  m_LocalPosition: {x: -0.031974092, y: 0.8483162, z: 2.3457813}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3111102023941892080
+--- !u!114 &4690919179914283061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079559313967590543}
+  m_GameObject: {fileID: 4690919179914283060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143e74fb2cd42a847bb697f8945a1366, type: 3}
+  m_Script: {fileID: 11500000, guid: ab099998f51b04140949e52c6e5fdd72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistanceToFurthest: 7
-  characterPrefab: {fileID: 4601248200661626050, guid: 1da8d62bb41838a4fb6ef86489c86ca7, type: 3}
+  bonePrefab: {fileID: 3230540925993261234, guid: e13f37763593ba640b2038d43975bf08, type: 3}
+  boneOffset: {x: 0, y: 1, z: 0}
+  maxBoneCount: 10
+  distanceBetweenBones: 1

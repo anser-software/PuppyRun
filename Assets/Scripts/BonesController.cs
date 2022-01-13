@@ -19,9 +19,9 @@ public class BonesController : MonoBehaviour
 
     public Vector3 boneOffset;
 
-    public float distanceBetweenBones, maxLineLength;
+    public int maxBoneCount;
 
-    private float currentTotalLineSqrLength;
+    public float distanceBetweenBones;
 
     private bool isDrawing = false;
 
@@ -65,8 +65,6 @@ public class BonesController : MonoBehaviour
 
         currentBones.Clear();
 
-        currentTotalLineSqrLength = 0F;
-
         var bone = Instantiate(bonePrefab, InputManager.Instance.mouseWorldPosition + boneOffset, bonePrefab.transform.rotation * Quaternion.AngleAxis(90F, Vector3.forward));
 
         currentBones.Add(bone.transform);
@@ -106,10 +104,9 @@ public class BonesController : MonoBehaviour
 
             currentBones.Add(bone.transform);
 
-            currentTotalLineSqrLength += sqrLength;
         }
 
-        if (currentTotalLineSqrLength > maxLineLength * maxLineLength)
+        if (currentBones.Count == maxBoneCount)
             StopDrawing();
     }
 
