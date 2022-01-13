@@ -16,7 +16,7 @@ public class CrowdManager : MonoBehaviour
     private GameObject characterPrefab;
 
     public Vector3 averagePos { get; private set; }
-    public Vector3 furthestPos { get; private set; }
+    public Transform furthestCharacter { get; private set; }
 
 
     private void Awake()
@@ -55,7 +55,7 @@ public class CrowdManager : MonoBehaviour
             }
         }
 
-        furthestPos = characters[furthestIndex].transform.position;
+        furthestCharacter = characters[furthestIndex].transform;
     }
 
     private void SetAveragePosition()

@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-
-    [SerializeField]
-    private Rigidbody target;
     
     [SerializeField]
-    private float speed, overdoMagnitude, overdoAcceleration;
+    private float speed;
 
     private Vector3 offset;
 
-    private Vector3 overdo = Vector3.zero;
+    private float maxZ;
 
     private void Start()
     {
-        offset = transform.position - target.position;
+        offset = transform.position - CrowdManager.instance.furthestCharacter.position;
+
+        maxZ = CrowdManager.instance.furthestCharacter.position.z;
     }
 
     private void FixedUpdate()
     {
-        overdo = Vector3.Lerp(overdo, target.velocity * overdoMagnitude, Time.deltaTime * overdoAcceleration);
-        //var targetPos =  target.position + overdo + offset;
+        maxZ = Mathf.Max(CrowdManager.instance.furthestCharacter.position.z, maxZ);
 
-        overdo.x = 0F;
-
-        var targetPos = new Vector3(0F, offset.y, CrowdManager.instance.furthestPos.z + offset.z) + overdo;
+        var targetPos = new Vector3(0F, offset.y, maxZ + offset.z);
 
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
     }

@@ -12,7 +12,7 @@ public class SpeedModifier : MonoBehaviour
     private float value;
 
     [SerializeField]
-    private float changeDuration;
+    private float changeDuration, totalDuration;
 
     private bool activated = false;
 
@@ -26,13 +26,13 @@ public class SpeedModifier : MonoBehaviour
             switch(ModType)
             {
                 case ModType.Add:
-                    CharacterController.instance.AddSpeed(value, changeDuration);
+                    CharacterController.instance.AddSpeed(value, changeDuration, totalDuration);
                     break;
                 case ModType.MultiplyBy:
-                    CharacterController.instance.MultiplySpeed(value, changeDuration);
+                    CharacterController.instance.MultiplySpeed(value, changeDuration, totalDuration);
                     break;
                 case ModType.DivideBy:
-                    CharacterController.instance.MultiplySpeed(1F / value, changeDuration);
+                    CharacterController.instance.MultiplySpeed(1F / value, changeDuration, totalDuration);
                     break;
             }
 

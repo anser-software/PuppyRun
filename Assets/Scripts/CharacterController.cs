@@ -10,7 +10,10 @@ public class CharacterController : MonoBehaviour
     public static CharacterController instance { get; private set; }
 
     [SerializeField]
-    private float defaultSpeed, rotationAngle, rotationSpeed, centeringForce;
+    private bool modifyDefaultSpeed;
+
+    [SerializeField]
+    private float defaultSpeed, rotationAngle, rotationSpeed, centeringForce, eatBoneDistance;
 
     private Rigidbody rb;
 
@@ -20,7 +23,11 @@ public class CharacterController : MonoBehaviour
 
     private Vector3 targetScale;
 
-    private Transform bone;
+    private float targetSpeed;
+
+    private Vector3 prevPos;
+
+    private float speedTimer = 0.5F;
 
     private void Awake()
     {
@@ -31,13 +38,13 @@ public class CharacterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        speed = defaultSpeed;
+        targetSpeed = speed = defaultSpeed;
 
         targetScale = transform.localScale;
 
-        bone = FindObjectOfType<Bone>().transform;
-
         moveVector = Vector3.forward * speed;
+
+        prevPos = transform.position;
     }
 
     private void FixedUpdate()
@@ -49,31 +56,83 @@ public class CharacterController : MonoBehaviour
         CheckDistance();
     }
 
+    private void Update()
+    {
+        if (speedTimer <= 0F)
+        {
+            var speed = (transform.position - prevPos).magnitude / 0.5F;
+
+            Debug.Log(speed);
+
+            prevPos = transform.position;
+
+            speedTimer = 0.5F;
+        } else
+        {
+            speedTimer -= Time.deltaTime;
+        }
+    }
+
     private void Move()
     {
-        var centeringVector = (CrowdManager.instance.furthestPos - transform.position) * centeringForce;
+        var centeringVector = (CrowdManager.instance.furthestCharacter.position - transform.position) * centeringForce;
 
-        moveVector = (bone.position - transform.position).normalized * speed + centeringVector;
+        var bone = BonesController.instance.targetBone;
 
-        rb.velocity = Vector3.Lerp(rb.velocity, moveVector, Time.deltaTime * rotationSpeed);
+        if (bone)
+        {
+            var displacementVector = bone.position - transform.position;
+
+            moveVector = displacementVector.normalized * speed + centeringVector;
+
+            if (displacementVector.sqrMagnitude < eatBoneDistance * eatBoneDistance)
+                BonesController.instance.EatFirstBone();
+        } else
+        {
+            moveVector = transform.forward * speed + centeringVector;
+        }
+
+        rb.velocity = rb.velocity.normalized * speed;
+
+        rb.velocity = Vector3.Lerp(rb.velocity, moveVector, Time.deltaTime * rotationSpeed);   
     }
 
     private void CheckDistance()
     {
-        if((CrowdManager.instance.furthestPos - transform.position).magnitude > CrowdManager.instance.maxDistanceToFurthest)
+        if((CrowdManager.instance.furthestCharacter.position - transform.position).sqrMagnitude > CrowdManager.instance.maxDistanceToFurthest * CrowdManager.instance.maxDistanceToFurthest)
         {
             CrowdManager.instance.RemoveCharacter(this);
         }
     }
 
-    public void MultiplySpeed(float value, float changeDuration)
+    public void MultiplySpeed(float value, float changeDuration, float totalDuration)
     {
-        DOTween.To(() => speed, x => speed = x, speed * value, changeDuration);
+        var seq = DOTween.Sequence();
+
+        seq.AppendInterval(totalDuration);
+
+        targetSpeed = modifyDefaultSpeed? defaultSpeed * value : targetSpeed * value;
+
+        seq.Join(DOTween.To(() => speed, x => speed = x, targetSpeed, changeDuration));
+
+        DOTween.Kill("RESET");
+
+        seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
     }
 
-    public void AddSpeed(float value, float changeDuration)
+    public void AddSpeed(float value, float changeDuration, float totalDuration)
     {
-        DOTween.To(() => speed, x => speed = x, speed + value, changeDuration);
+        var seq = DOTween.Sequence();
+
+        seq.AppendInterval(totalDuration);
+
+        targetSpeed = modifyDefaultSpeed ? defaultSpeed + value : targetSpeed + value;
+
+        seq.Join(DOTween.To(() => speed, x => speed = x, targetSpeed, changeDuration));
+
+        DOTween.Kill("RESET");
+
+        seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
     }
 
 

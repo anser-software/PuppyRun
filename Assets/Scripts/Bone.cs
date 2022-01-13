@@ -19,7 +19,7 @@ public class Bone : MonoBehaviour
 
         var y = transform.position.y;
 
-        var z = CrowdManager.instance.furthestPos.z + zOffset;
+        var z = CrowdManager.instance.furthestCharacter.position.z + zOffset;
 
         if (Input.GetMouseButton(0))
         {

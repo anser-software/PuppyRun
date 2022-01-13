@@ -139,5 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModType: 0
-  value: 0.2
+  value: 1
   changeDuration: 0.5
+  totalDuration: 4

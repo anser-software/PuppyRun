@@ -99,6 +99,7 @@ MonoBehaviour:
   ModType: 1
   value: 2
   changeDuration: 1
+  totalDuration: 2
 --- !u!65 &5035074796290655494
 BoxCollider:
   m_ObjectHideFlags: 0

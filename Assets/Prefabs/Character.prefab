@@ -81,10 +81,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b31ab9d941050c4093bf0226e0e62b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modifyDefaultSpeed: 1
   defaultSpeed: 5
   rotationAngle: -70
   rotationSpeed: 10
   centeringForce: 1
+  eatBoneDistance: 1.7
 --- !u!136 &4601248200661626078
 CapsuleCollider:
   m_ObjectHideFlags: 0
