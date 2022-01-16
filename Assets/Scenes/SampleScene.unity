@@ -642,53 +642,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6517bc8aad8068241976de60abe28546, type: 3}
---- !u!1 &1547559962
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1547559964}
-  - component: {fileID: 1547559963}
-  m_Layer: 0
-  m_Name: BonesController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1547559963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547559962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab099998f51b04140949e52c6e5fdd72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bonePrefab: {fileID: 3230540925993261234, guid: e13f37763593ba640b2038d43975bf08, type: 3}
-  boneOffset: {x: 0, y: 1, z: 0}
-  distanceBetweenBones: 1
-  maxLineLength: 10
---- !u!4 &1547559964
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547559962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.031974092, y: 0.8483162, z: 2.3457813}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1698436910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,6 +1953,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da8d62bb41838a4fb6ef86489c86ca7, type: 3}
+--- !u!1001 &4690919178371492910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.031974092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8483162
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3457813
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283060, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_Name
+      value: BonesController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
 --- !u!4 &4924677261369035852
 Transform:
   m_ObjectHideFlags: 0
@@ -3007,10 +3017,6 @@ PrefabInstance:
     - target: {fileID: 327911253464912680, guid: 3a418e79bff85204f816edf785c76792, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3111102023941892080, guid: 3a418e79bff85204f816edf785c76792, type: 3}
-      propertyPath: maxDistanceToFurthest
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7079559313967590543, guid: 3a418e79bff85204f816edf785c76792, type: 3}
       propertyPath: m_Name
