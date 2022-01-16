@@ -9,7 +9,12 @@ ModelImporter:
   - first:
       74: -7536546058115350168
     second: metarig|metarigAction.002
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dog
+    second: {fileID: 2100000, guid: cbc7b08352c05e44a9073f28d5bd07fb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
