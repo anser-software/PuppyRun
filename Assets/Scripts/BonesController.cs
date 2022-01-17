@@ -65,7 +65,9 @@ public class BonesController : MonoBehaviour
 
         currentBones.Clear();
 
-        var bone = Instantiate(bonePrefab, InputManager.Instance.mouseWorldPosition + boneOffset, bonePrefab.transform.rotation * Quaternion.AngleAxis(90F, Vector3.forward));
+        var bone = Instantiate(bonePrefab, InputManager.Instance.mouseWorldPosition + boneOffset, Quaternion.identity);
+
+        //bone.transform.forward = (currentBones[currentBones.Count - 1].position - bone.transform.position).normalized;
 
         currentBones.Add(bone.transform);
     }
@@ -94,13 +96,7 @@ public class BonesController : MonoBehaviour
 
             var bone = Instantiate(bonePrefab, position, bonePrefab.transform.rotation);
 
-            bone.transform.right = Vector3.up;
-
-            var targetForward = (currentBones[currentBones.Count - 1].position - bone.transform.position).normalized;
-
-            bone.transform.rotation = Quaternion.AngleAxis(90F, targetForward) * Quaternion.AngleAxis(
-                Vector3.Angle(bone.transform.forward, targetForward),
-                bone.transform.right);
+            bone.transform.forward = (currentBones[currentBones.Count - 1].position - bone.transform.position).normalized;
 
             currentBones.Add(bone.transform);
 

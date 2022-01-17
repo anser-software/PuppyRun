@@ -14,6 +14,9 @@ public class SpeedModifier : MonoBehaviour
     [SerializeField]
     private float changeDuration, totalDuration;
 
+    [SerializeField]
+    private GameObject fx;
+
     private bool activated = false;
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +40,9 @@ public class SpeedModifier : MonoBehaviour
             }
 
             activated = true;
+
+            if (fx)
+                Instantiate(fx, other.transform.position, Quaternion.identity);
         }
     }
 

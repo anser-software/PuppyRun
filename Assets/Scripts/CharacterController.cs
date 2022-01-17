@@ -25,9 +25,9 @@ public class CharacterController : MonoBehaviour
 
     private float targetSpeed;
 
-    //private Vector3 prevPos;
+    private bool caught;
 
-    //private float speedTimer = 0.5F;
+    private Vector3 catchTargetPos;
 
     private void Awake()
     {
@@ -43,35 +43,22 @@ public class CharacterController : MonoBehaviour
         targetScale = transform.localScale;
 
         moveVector = Vector3.forward * speed;
-
-        //prevPos = transform.position;
     }
 
     private void FixedUpdate()
     {
-        Move();
-
-        FaceMoveDirection();
-
-        CheckDistance();
-    }
-
-    /*private void Update()
-    {
-        if (speedTimer <= 0F)
+        if (!caught)
         {
-            var speed = (transform.position - prevPos).magnitude / 0.5F;
+            Move();
 
-            Debug.Log(speed);
+            FaceMoveDirection();
 
-            prevPos = transform.position;
-
-            speedTimer = 0.5F;
+            CheckDistance();
         } else
         {
-            speedTimer -= Time.deltaTime;
+            rb.velocity = (catchTargetPos - transform.position);
         }
-    }*/
+    }
 
     private void Move()
     {
@@ -153,5 +140,12 @@ public class CharacterController : MonoBehaviour
     private void FaceMoveDirection()
     {
         transform.forward = Vector3.Lerp(transform.forward, rb.velocity.normalized, Time.deltaTime * rotationSpeed);
+    }
+
+    public void Catch(Vector3 targetPos)
+    {
+        caught = true;
+
+        catchTargetPos = targetPos;
     }
 }

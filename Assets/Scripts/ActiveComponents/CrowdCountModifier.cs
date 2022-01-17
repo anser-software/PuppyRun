@@ -11,6 +11,9 @@ public class CrowdCountModifier : MonoBehaviour
     [SerializeField]
     private int value;
 
+    [SerializeField]
+    private GameObject fx;
+
     private bool activated = false;
 
     private void OnTriggerEnter(Collider other)
@@ -56,6 +59,9 @@ public class CrowdCountModifier : MonoBehaviour
             }
 
             activated = true;
+
+            if(fx)
+                Instantiate(fx, other.transform.position, Quaternion.identity);
         }
     }
 

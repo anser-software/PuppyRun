@@ -542,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModType: 2
   value: 2
+  fx: {fileID: 0}
 --- !u!1 &177031692
 GameObject:
   m_ObjectHideFlags: 0
@@ -2846,53 +2847,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003802461}
   m_Mesh: {fileID: 4493585093827132993, guid: 7a8535e829a81844098cbc23101c94ee, type: 3}
---- !u!1 &1038611516
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1038611518}
-  - component: {fileID: 1038611517}
-  m_Layer: 0
-  m_Name: BonesController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1038611517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038611516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab099998f51b04140949e52c6e5fdd72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bonePrefab: {fileID: 3230540925993261234, guid: e13f37763593ba640b2038d43975bf08, type: 3}
-  boneOffset: {x: 0, y: 1, z: 0}
-  maxBoneCount: 0
-  distanceBetweenBones: 1
---- !u!4 &1038611518
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038611516}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7621099, y: -102.1718, z: -135.91241}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1059136494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,6 +3085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModType: 2
   value: 2
+  fx: {fileID: 0}
 --- !u!1 &1119164490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5927131211601092240, guid: bbea3c1433537f54aa6fb5d52b0918ce, type: 3}
@@ -3155,6 +3110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModType: 0
   value: 3
+  fx: {fileID: 0}
 --- !u!1 &1130357216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,6 +3459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModType: 0
   value: 2
+  fx: {fileID: 0}
 --- !u!1 &1286380708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,6 +4029,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397819790}
   m_Mesh: {fileID: -2477511411847689622, guid: 7a8535e829a81844098cbc23101c94ee, type: 3}
+--- !u!1001 &1399275754
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.031974092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8483162
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3457813
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283058, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690919179914283060, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
+      propertyPath: m_Name
+      value: BonesController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
 --- !u!1001 &1436853454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4329,6 +4343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModType: 0
   value: 5
+  fx: {fileID: 0}
 --- !u!1 &1504327680
 GameObject:
   m_ObjectHideFlags: 0
@@ -5330,6 +5345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModType: 0
   value: 3
+  fx: {fileID: 0}
 --- !u!1 &1816470479
 GameObject:
   m_ObjectHideFlags: 0

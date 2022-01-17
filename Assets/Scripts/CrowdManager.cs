@@ -104,4 +104,11 @@ public class CrowdManager : MonoBehaviour
         Destroy(character.gameObject);
     }
 
+    public void FreezeCharacter(CharacterController character, Vector3 targetPos)
+    {
+        characters.Remove(character);
+
+        character.Catch(targetPos);
+    }
+
 }

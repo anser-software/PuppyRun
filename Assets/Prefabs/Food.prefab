@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModType: 0
-  value: 1
+  value: 2
   changeDuration: 0.5
   totalDuration: 4
+  fx: {fileID: 0}
