@@ -6870,6 +6870,14 @@ PrefabInstance:
       propertyPath: catchDuration
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
+      propertyPath: speedPostCatch
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
+      propertyPath: postCatchDuration
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
 --- !u!1001 &4601248201046887695

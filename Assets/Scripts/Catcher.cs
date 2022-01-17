@@ -7,7 +7,7 @@ public class Catcher : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed, sampleInterval, goToNextPointDistance, catchDistance, catchDuration;
+    private float speed, speedPostCatch, postCatchDuration, sampleInterval, goToNextPointDistance, catchDistance, catchDuration;
 
     [SerializeField]
     private Animator animator;
@@ -18,7 +18,7 @@ public class Catcher : MonoBehaviour
 
     private Vector3 currentTargetPosition;
 
-    private bool catching;
+    private bool catching, postCatch;
 
     private void Start()
     {
@@ -40,9 +40,11 @@ public class Catcher : MonoBehaviour
         if (catching)
             return;
 
+        var currentSpeed = postCatch ? speedPostCatch : speed;
+
         var displacement = currentTargetPosition - transform.position;
 
-        transform.Translate(displacement.normalized * speed * Time.deltaTime);
+        transform.Translate(displacement.normalized * currentSpeed * Time.deltaTime);
 
         if (displacement.sqrMagnitude < goToNextPointDistance * goToNextPointDistance)
             currentTargetPosition = targetPositions.Dequeue();
@@ -66,7 +68,23 @@ public class Catcher : MonoBehaviour
 
         animator.SetTrigger("Catch");
 
-        DOTween.Sequence().SetDelay(catchDuration).OnComplete(() => catching = false);
+        var catchSequence = DOTween.Sequence();
+
+        catchSequence.AppendInterval(catchDuration / 2F);
+
+        catchSequence.AppendCallback(CrowdManager.instance.RemoveLast);
+
+        catchSequence.AppendInterval(catchDuration / 2F);
+
+        catchSequence.AppendCallback(() => 
+        { 
+            catching = false;
+            postCatch = true;
+        });
+
+        catchSequence.AppendInterval(postCatchDuration);
+
+        catchSequence.AppendCallback(() => postCatch = false);
     }
 
 }

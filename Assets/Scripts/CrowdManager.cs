@@ -13,7 +13,7 @@ public class CrowdManager : MonoBehaviour
     public float maxDistanceToFurthest;
 
     [SerializeField]
-    private GameObject characterPrefab;
+    private GameObject characterPrefab, removeCharacterFX;
 
     public Vector3 averagePos { get; private set; }
     public Transform furthestCharacter { get; private set; }
@@ -109,6 +109,33 @@ public class CrowdManager : MonoBehaviour
         characters.Remove(character);
 
         character.Catch(targetPos);
+    }
+
+    public void RemoveLast()
+    {
+        int nearestIndex = 0;
+
+        float nearestZ = Mathf.Infinity;
+
+        for (int i = 0; i < characters.Count; i++)
+        {
+            if (characters[i].transform.position.z < nearestZ)
+            {
+                nearestZ = characters[i].transform.position.z;
+                nearestIndex = i;
+            }
+        }
+
+        var charToRemove = characters[nearestIndex];
+
+        characters.RemoveAt(nearestIndex);
+
+        if(removeCharacterFX)
+        {
+            Instantiate(removeCharacterFX, charToRemove.transform.position, Quaternion.identity);
+        }
+
+        Destroy(charToRemove.gameObject);
     }
 
 }
