@@ -2,23 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using DG.Tweening;
 public class CrowdManager : MonoBehaviour
 {
     
     public static CrowdManager instance { get; private set; }
 
     public List<CharacterController> characters { get; private set; } = new List<CharacterController>();
+    public Vector3 averagePos { get; private set; }
+    public Transform furthestCharacter { get; private set; }
+    public Transform nearestCharacter { get; private set; }
+
+    public float speed { get; private set; }
 
     public float maxDistanceToFurthest;
 
     [SerializeField]
     private GameObject characterPrefab, removeCharacterFX;
 
-    public Vector3 averagePos { get; private set; }
-    public Transform furthestCharacter { get; private set; }
+    [SerializeField]
+    private bool modifyDefaultSpeed;
 
-    public Transform nearestCharacter { get; private set; }
+    [SerializeField]
+    private float defaultSpeed;
+
+    private float targetSpeed;
 
 
     private void Awake()
@@ -28,6 +36,8 @@ public class CrowdManager : MonoBehaviour
 
     private void Start()
     {
+        targetSpeed = speed = defaultSpeed;
+
         characters = FindObjectsOfType<CharacterController>().ToList();
 
         SetAveragePosition();
@@ -40,6 +50,35 @@ public class CrowdManager : MonoBehaviour
         SetAveragePosition();
 
         SetFurthestAndNearestPositions();
+    }
+    public void MultiplySpeed(float value, float changeDuration, float totalDuration)
+    {
+        var seq = DOTween.Sequence();
+
+        seq.AppendInterval(totalDuration);
+
+        targetSpeed = modifyDefaultSpeed ? defaultSpeed * value : targetSpeed * value;
+
+        seq.Join(DOTween.To(() => speed, x => speed = x, targetSpeed, changeDuration));
+
+        DOTween.Kill("RESET");
+
+        seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
+    }
+
+    public void AddSpeed(float value, float changeDuration, float totalDuration)
+    {
+        var seq = DOTween.Sequence();
+
+        seq.AppendInterval(totalDuration);
+
+        targetSpeed = modifyDefaultSpeed ? defaultSpeed + value : targetSpeed + value;
+
+        seq.Join(DOTween.To(() => speed, x => speed = x, targetSpeed, changeDuration));
+
+        DOTween.Kill("RESET");
+
+        seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
     }
 
     private void SetFurthestAndNearestPositions()

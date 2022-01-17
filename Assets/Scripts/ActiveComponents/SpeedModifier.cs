@@ -29,13 +29,13 @@ public class SpeedModifier : MonoBehaviour
             switch(ModType)
             {
                 case ModType.Add:
-                    CharacterController.instance.AddSpeed(value, changeDuration, totalDuration);
+                    CrowdManager.instance.AddSpeed(value, changeDuration, totalDuration);
                     break;
                 case ModType.MultiplyBy:
-                    CharacterController.instance.MultiplySpeed(value, changeDuration, totalDuration);
+                    CrowdManager.instance.MultiplySpeed(value, changeDuration, totalDuration);
                     break;
                 case ModType.DivideBy:
-                    CharacterController.instance.MultiplySpeed(1F / value, changeDuration, totalDuration);
+                    CrowdManager.instance.MultiplySpeed(1F / value, changeDuration, totalDuration);
                     break;
             }
 

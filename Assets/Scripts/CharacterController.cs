@@ -10,20 +10,13 @@ public class CharacterController : MonoBehaviour
     public static CharacterController instance { get; private set; }
 
     [SerializeField]
-    private bool modifyDefaultSpeed;
-
-    [SerializeField]
-    private float defaultSpeed, rotationAngle, rotationSpeed, centeringForce, eatBoneDistance;
+    private float rotationAngle, rotationSpeed, centeringForce, eatBoneDistance;
 
     private Rigidbody rb;
 
     private Vector3 moveVector;
 
-    private float speed;
-
     private Vector3 targetScale;
-
-    private float targetSpeed;
 
     private bool caught;
 
@@ -38,11 +31,9 @@ public class CharacterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        targetSpeed = speed = defaultSpeed;
-
         targetScale = transform.localScale;
 
-        moveVector = Vector3.forward * speed;
+        moveVector = Vector3.forward * CrowdManager.instance.speed;
     }
 
     private void FixedUpdate()
@@ -70,16 +61,16 @@ public class CharacterController : MonoBehaviour
         {
             var displacementVector = bone.position - transform.position;
 
-            moveVector = displacementVector.normalized * speed + centeringVector;
+            moveVector = displacementVector.normalized * CrowdManager.instance.speed + centeringVector;
 
             if (displacementVector.sqrMagnitude < eatBoneDistance * eatBoneDistance)
                 BonesController.instance.EatFirstBone();
         } else
         {
-            moveVector = transform.forward * speed + centeringVector;
+            moveVector = transform.forward * CrowdManager.instance.speed + centeringVector;
         }
 
-        rb.velocity = rb.velocity.normalized * speed;
+        rb.velocity = rb.velocity.normalized * CrowdManager.instance.speed;
 
         rb.velocity = Vector3.Lerp(rb.velocity, moveVector, Time.deltaTime * rotationSpeed);   
     }
@@ -90,36 +81,6 @@ public class CharacterController : MonoBehaviour
         {
             CrowdManager.instance.RemoveCharacter(this);
         }
-    }
-
-    public void MultiplySpeed(float value, float changeDuration, float totalDuration)
-    {
-        var seq = DOTween.Sequence();
-
-        seq.AppendInterval(totalDuration);
-
-        targetSpeed = modifyDefaultSpeed? defaultSpeed * value : targetSpeed * value;
-
-        seq.Join(DOTween.To(() => speed, x => speed = x, targetSpeed, changeDuration));
-
-        DOTween.Kill("RESET");
-
-        seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
-    }
-
-    public void AddSpeed(float value, float changeDuration, float totalDuration)
-    {
-        var seq = DOTween.Sequence();
-
-        seq.AppendInterval(totalDuration);
-
-        targetSpeed = modifyDefaultSpeed ? defaultSpeed + value : targetSpeed + value;
-
-        seq.Join(DOTween.To(() => speed, x => speed = x, targetSpeed, changeDuration));
-
-        DOTween.Kill("RESET");
-
-        seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
     }
 
 
@@ -145,6 +106,8 @@ public class CharacterController : MonoBehaviour
     public void Catch(Vector3 targetPos)
     {
         caught = true;
+
+        rb.velocity = rb.velocity * 0.2F;
 
         catchTargetPos = targetPos;
     }
