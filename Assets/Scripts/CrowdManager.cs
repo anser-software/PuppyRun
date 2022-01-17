@@ -18,6 +18,8 @@ public class CrowdManager : MonoBehaviour
     public Vector3 averagePos { get; private set; }
     public Transform furthestCharacter { get; private set; }
 
+    public Transform nearestCharacter { get; private set; }
+
 
     private void Awake()
     {
@@ -30,21 +32,25 @@ public class CrowdManager : MonoBehaviour
 
         SetAveragePosition();
 
-        SetFurthestPosition();
+        SetFurthestAndNearestPositions();
     }
 
     private void Update()
     {
         SetAveragePosition();
 
-        SetFurthestPosition();
+        SetFurthestAndNearestPositions();
     }
 
-    private void SetFurthestPosition()
+    private void SetFurthestAndNearestPositions()
     {
         int furthestIndex = 0;
 
         float furthestZ = Mathf.NegativeInfinity;
+
+        int nearestIndex = 0;
+
+        float nearestZ = Mathf.Infinity;
 
         for (int i = 0; i < characters.Count; i++)
         {
@@ -52,10 +58,15 @@ public class CrowdManager : MonoBehaviour
             {
                 furthestZ = characters[i].transform.position.z;
                 furthestIndex = i;
+            } else if(characters[i].transform.position.z < nearestZ)
+            {
+                nearestZ = characters[i].transform.position.z;
+                nearestIndex = i;
             }
         }
 
         furthestCharacter = characters[furthestIndex].transform;
+        nearestCharacter = characters[nearestIndex].transform;
     }
 
     private void SetAveragePosition()
@@ -81,7 +92,7 @@ public class CrowdManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, characters.Count);
 
-        Destroy(characters[randomIndex]);
+        Destroy(characters[randomIndex].gameObject);
 
         characters.RemoveAt(randomIndex);
     }
