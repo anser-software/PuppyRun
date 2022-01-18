@@ -48,3 +48,4 @@ MonoBehaviour:
   removeCharacterFX: {fileID: 0}
   modifyDefaultSpeed: 1
   defaultSpeed: 5
+  immunityDuration: 1.25

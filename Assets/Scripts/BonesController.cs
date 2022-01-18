@@ -28,6 +28,8 @@ public class BonesController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        Finish.instance.OnFinished += ClearBones;
     }
 
     private void Update()
@@ -58,18 +60,23 @@ public class BonesController : MonoBehaviour
 
         isDrawing = true;
 
-        foreach (var b in currentBones)
-        {
-            Destroy(b.gameObject);
-        }
-
-        currentBones.Clear();
+        ClearBones();
 
         var bone = Instantiate(bonePrefab, InputManager.Instance.mouseWorldPosition + boneOffset, Quaternion.identity);
 
         //bone.transform.forward = (currentBones[currentBones.Count - 1].position - bone.transform.position).normalized;
 
         currentBones.Add(bone.transform);
+    }
+
+    public void ClearBones()
+    {
+        foreach (var b in currentBones)
+        {
+            Destroy(b.gameObject);
+        }
+
+        currentBones.Clear();
     }
 
     private void Draw()
