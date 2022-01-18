@@ -32,7 +32,7 @@ public class CrowdCountModifier : MonoBehaviour
                         {
                             CrowdManager.instance.AddCharacter();
                         }
-                    } else if(value < 0)
+                    } else if(value < 0 && !CrowdManager.instance.immuneToRemove)
                     {
                         for (int i = 0; i < value; i++)
                         {
@@ -49,6 +49,9 @@ public class CrowdCountModifier : MonoBehaviour
                     }
                     break;
                 case ModType.DivideBy:
+                    if (CrowdManager.instance.immuneToRemove)
+                        return;
+
                     var countToRemove = CrowdManager.instance.characters.Count - (CrowdManager.instance.characters.Count / value);
 
                     for (int i = 0; i < countToRemove; i++)

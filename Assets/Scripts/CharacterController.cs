@@ -22,9 +22,12 @@ public class CharacterController : MonoBehaviour
 
     private Vector3 catchTargetPos;
 
+    
+
     private void Awake()
     {
         instance = this;
+
     }
 
     private void Start()

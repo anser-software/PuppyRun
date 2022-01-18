@@ -12,6 +12,7 @@ public class CrowdManager : MonoBehaviour
     public Vector3 averagePos { get; private set; }
     public Transform furthestCharacter { get; private set; }
     public Transform nearestCharacter { get; private set; }
+    public bool immuneToRemove { get; private set; }
 
     public float speed { get; private set; }
 
@@ -24,7 +25,7 @@ public class CrowdManager : MonoBehaviour
     private bool modifyDefaultSpeed;
 
     [SerializeField]
-    private float defaultSpeed;
+    private float defaultSpeed, immunityDuration;
 
     private float targetSpeed;
 
@@ -126,6 +127,10 @@ public class CrowdManager : MonoBehaviour
         var character = Instantiate(characterPrefab, averagePos, Quaternion.identity);
 
         characters.Add(character.GetComponent<CharacterController>());
+
+        immuneToRemove = true;
+
+        DOTween.Sequence().SetDelay(immunityDuration).OnComplete(() => immuneToRemove = false);
     }
 
     public void RemoveRandomCharacter()
@@ -135,6 +140,10 @@ public class CrowdManager : MonoBehaviour
         Destroy(characters[randomIndex].gameObject);
 
         characters.RemoveAt(randomIndex);
+
+        immuneToRemove = true;
+
+        DOTween.Sequence().SetDelay(immunityDuration).OnComplete(() => immuneToRemove = false);
     }
 
     public void RemoveCharacter(CharacterController character) 

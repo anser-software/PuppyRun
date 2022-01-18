@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using System;
 public class Finish : MonoBehaviour
 {
 
     public static Finish instance { get; private set; }
+
+    public Action OnFinished;
 
     [SerializeField]
     private Transform foodPile;
@@ -34,6 +36,8 @@ public class Finish : MonoBehaviour
         CrowdManager.instance.ActivateFinish();
 
         DOTween.Sequence().SetDelay(startEatingDelay).OnComplete(() => StartEating(CrowdManager.instance.characters.Count));
+
+        OnFinished?.Invoke();
     }
 
     public Vector3[] GetTargetPositions(int count)

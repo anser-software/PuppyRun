@@ -20,11 +20,22 @@ public class Catcher : MonoBehaviour
 
     private bool catching, postCatch;
 
+    private bool active = true;
+
     private void Start()
     {
         SamplePosition();
 
         currentTargetPosition = targetPositions.Dequeue();
+
+        Finish.instance.OnFinished += OnFinish;
+    }
+
+    private void OnFinish()
+    {
+        active = false;
+
+        transform.DOScale(Vector3.zero, 1F).OnComplete(() => Destroy(gameObject));
     }
 
     private void Update()
@@ -37,7 +48,7 @@ public class Catcher : MonoBehaviour
             timer = sampleInterval;
         }
 
-        if (catching)
+        if (catching || !active)
             return;
 
         var currentSpeed = postCatch ? speedPostCatch : speed;
