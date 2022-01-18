@@ -28,6 +28,7 @@ public class CrowdManager : MonoBehaviour
 
     private float targetSpeed;
 
+    private bool finish;
 
     private void Awake()
     {
@@ -175,6 +176,25 @@ public class CrowdManager : MonoBehaviour
         }
 
         Destroy(charToRemove.gameObject);
+    }
+
+    public void ActivateFinish()
+    {
+        if (finish)
+            return;
+
+        finish = true;
+
+        var targetPositionsOrdered = Finish.instance.GetTargetPositions(characters.Count).OrderBy(p => p.z).ToArray();
+
+        var charactersOrdered = characters.OrderByDescending(c => c.transform.position.z).ToArray();
+
+        for (int i = 0; i < charactersOrdered.Length; i++)
+        {
+            charactersOrdered[i].transform.DOMove(targetPositionsOrdered[i], 1F);
+            charactersOrdered[i].transform.DORotateQuaternion(Quaternion.LookRotation(Finish.instance.transform.position - targetPositionsOrdered[i], Vector3.up), 1F);
+            charactersOrdered[i].Finish();
+        }
     }
 
 }

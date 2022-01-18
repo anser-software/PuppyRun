@@ -18,7 +18,7 @@ public class CharacterController : MonoBehaviour
 
     private Vector3 targetScale;
 
-    private bool caught;
+    private bool caught, finished;
 
     private Vector3 catchTargetPos;
 
@@ -38,6 +38,9 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (finished)
+            return;
+
         if (!caught)
         {
             Move();
@@ -83,6 +86,12 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void Finish()
+    {
+        finished = true;
+
+        rb.isKinematic = true;
+    }
 
     public void MultiplyScale(float value, float changeDuration)
     {
