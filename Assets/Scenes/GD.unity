@@ -7310,7 +7310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
       propertyPath: speed
-      value: 6
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
       propertyPath: catchDistance
