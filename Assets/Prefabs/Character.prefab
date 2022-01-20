@@ -85,7 +85,7 @@ MonoBehaviour:
   rotationSpeed: 10
   centeringForce: 1
   eatBoneDistance: 1.7
-  immunityDuration: 1.25
+  speedUpFX: {fileID: 0}
 --- !u!136 &4601248200661626078
 CapsuleCollider:
   m_ObjectHideFlags: 0
