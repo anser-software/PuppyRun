@@ -15,6 +15,9 @@ public class NetHammer : MonoBehaviour
     [SerializeField]
     private Vector3 shadowMinScale, shadowMaxScale;
 
+    [SerializeField]
+    private GameObject catchFX;
+
     private float timer;
 
     private bool inHit;
@@ -70,6 +73,11 @@ public class NetHammer : MonoBehaviour
             }
 
             DOTween.Kill("NetHammer_" + id.ToString());
+
+            if(catchFX)
+            {
+                Instantiate(catchFX, netCenter.position, Quaternion.identity);
+            }
 
             active = false;
         }

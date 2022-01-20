@@ -12,6 +12,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float rotationAngle, rotationSpeed, centeringForce, eatBoneDistance;
 
+    [SerializeField]
+    private GameObject speedUpFX;
+
     private Rigidbody rb;
 
     private Vector3 moveVector;
@@ -94,6 +97,16 @@ public class CharacterController : MonoBehaviour
         finished = true;
 
         rb.isKinematic = true;
+    }
+
+    public void SpeedUpFX(float duration)
+    {
+        if(speedUpFX)
+        {
+            speedUpFX.SetActive(true);
+
+            DOTween.Sequence().SetDelay(duration).OnComplete(() => speedUpFX.SetActive(false));
+        }
     }
 
     public void MultiplyScale(float value, float changeDuration)

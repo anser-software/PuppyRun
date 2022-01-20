@@ -12,15 +12,19 @@ public class Catcher : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private Transform netCenter;
+
+    [SerializeField]
+    private GameObject catchFX;
+
     private float timer;
 
     private Queue<Vector3> targetPositions = new Queue<Vector3>();
 
     private Vector3 currentTargetPosition;
 
-    private bool catching, postCatch;
-
-    private bool active = true;
+    private CatcherState CatcherState = CatcherState.Chasing;
 
     private void Start()
     {
@@ -33,13 +37,35 @@ public class Catcher : MonoBehaviour
 
     private void OnFinish()
     {
-        active = false;
+        CatcherState = CatcherState.Inactive;
 
         transform.DOScale(Vector3.zero, 1F).OnComplete(() => Destroy(gameObject));
     }
 
+    private void StartChasing()
+    {
+        CatcherState = CatcherState.Chasing;
+
+        Debug.Log("CHASING");
+    }
+
     private void Update()
     {
+        if(CatcherState == CatcherState.Waiting)
+        {
+            if ((CrowdManager.instance.nearestCharacter.position - transform.position).sqrMagnitude < catchDistance * catchDistance)
+            {
+                Catch();
+            }
+
+            if(CrowdManager.instance.nearestCharacter.position.z > transform.position.z + 4F)
+            {
+                StartChasing();
+            }
+
+            return;
+        }
+
         timer -= Time.deltaTime;
 
         if (timer <= 0F)
@@ -48,10 +74,10 @@ public class Catcher : MonoBehaviour
             timer = sampleInterval;
         }
 
-        if (catching || !active)
+        if (CatcherState != CatcherState.Chasing && CatcherState != CatcherState.PostCatch)
             return;
 
-        var currentSpeed = postCatch ? speedPostCatch : speed;
+        var currentSpeed = CatcherState == CatcherState.PostCatch ? speedPostCatch : speed;
 
         var displacement = currentTargetPosition - transform.position;
 
@@ -75,7 +101,7 @@ public class Catcher : MonoBehaviour
 
     private void Catch()
     {
-        catching = true;
+        CatcherState = CatcherState.Catching;
 
         animator.SetTrigger("Catch");
 
@@ -83,19 +109,39 @@ public class Catcher : MonoBehaviour
 
         catchSequence.AppendInterval(catchDuration / 2F);
 
-        catchSequence.AppendCallback(CrowdManager.instance.RemoveLast);
+        catchSequence.AppendCallback(() => {
+            if(catchFX)
+            {
+                Instantiate(catchFX, netCenter.position, Quaternion.identity);
+            }
+            CrowdManager.instance.RemoveLast();
+        }); ;
 
         catchSequence.AppendInterval(catchDuration / 2F);
 
         catchSequence.AppendCallback(() => 
-        { 
-            catching = false;
-            postCatch = true;
+        {
+            CatcherState = CatcherState.PostCatch;
         });
 
         catchSequence.AppendInterval(postCatchDuration);
 
-        catchSequence.AppendCallback(() => postCatch = false);
+        catchSequence.AppendCallback(() =>
+        {
+            if (CatcherState != CatcherState.Inactive)
+            {
+                CatcherState = CatcherState.Catching;
+            }
+        });
     }
 
+}
+
+public enum CatcherState
+{
+    Waiting,
+    Chasing,
+    Catching,
+    PostCatch,
+    Inactive
 }

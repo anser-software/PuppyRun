@@ -34,7 +34,7 @@ public class CrowdCountModifier : MonoBehaviour
                         }
                     } else if(value < 0 && !CrowdManager.instance.immuneToRemove)
                     {
-                        for (int i = 0; i < value; i++)
+                        for (int i = 0; i < -value; i++)
                         {
                             CrowdManager.instance.RemoveRandomCharacter();
                         }

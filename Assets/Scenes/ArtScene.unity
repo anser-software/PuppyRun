@@ -3039,11 +3039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8783676003533532530, guid: bbea3c1433537f54aa6fb5d52b0918ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7828209
+      value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: 8783676003533532530, guid: bbea3c1433537f54aa6fb5d52b0918ce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.87
+      value: 28.02
       objectReference: {fileID: 0}
     - target: {fileID: 8783676003533532530, guid: bbea3c1433537f54aa6fb5d52b0918ce, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3098,8 +3098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c737a6eebea674644afcebbb6364cdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModType: 2
-  value: 2
+  ModType: 0
+  value: -2
   fx: {fileID: 0}
 --- !u!1 &1119164490 stripped
 GameObject:

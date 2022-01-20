@@ -319,6 +319,6 @@ MonoBehaviour:
   eatDuration: 5
   changeInHeightPerCharacter: -0.2
   bowlRadius: 2
-  gapBetweenCharacters: 0.1
-  initialOffset: 0.75
+  gapBetweenCharacters: 0.04
+  initialOffset: -0.5
   offsetPerCircle: 0.04

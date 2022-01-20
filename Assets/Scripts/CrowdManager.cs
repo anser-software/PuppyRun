@@ -66,6 +66,11 @@ public class CrowdManager : MonoBehaviour
         DOTween.Kill("RESET");
 
         seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
+
+        foreach (var character in characters)
+        {
+            character.SpeedUpFX(totalDuration);
+        }
     }
 
     public void AddSpeed(float value, float changeDuration, float totalDuration)
@@ -81,6 +86,11 @@ public class CrowdManager : MonoBehaviour
         DOTween.Kill("RESET");
 
         seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
+
+        foreach (var character in characters)
+        {
+            character.SpeedUpFX(totalDuration);
+        }
     }
 
     private void SetFurthestAndNearestPositions()
@@ -140,8 +150,6 @@ public class CrowdManager : MonoBehaviour
         Destroy(characters[randomIndex].gameObject);
 
         characters.RemoveAt(randomIndex);
-
-        immuneToRemove = true;
 
         DOTween.Sequence().SetDelay(immunityDuration).OnComplete(() => immuneToRemove = false);
     }

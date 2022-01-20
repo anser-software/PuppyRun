@@ -16,7 +16,7 @@ public class Finish : MonoBehaviour
     [SerializeField]
     private float startEatingDelay, eatDuration, changeInHeightPerCharacter, bowlRadius;
 
-    [SerializeField] [Range(0F, 1F)]
+    [SerializeField] [Range(-1F, 1F)]
     private float gapBetweenCharacters, initialOffset, offsetPerCircle;
 
     private bool activated;
