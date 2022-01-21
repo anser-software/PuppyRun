@@ -62,6 +62,6 @@ public class Finish : MonoBehaviour
 
         Debug.Log("totalChangeInHeight" + totalChangeInHeight);
 
-        foodPile.transform.DOBlendableMoveBy(Vector3.up * totalChangeInHeight, eatDuration).SetEase(Ease.OutSine);
+        foodPile.transform.DOBlendableMoveBy(Vector3.up * totalChangeInHeight, eatDuration).SetEase(Ease.OutSine).OnComplete(() => GameManager.instance.Win());
     }
 }

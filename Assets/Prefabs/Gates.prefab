@@ -100,6 +100,7 @@ MonoBehaviour:
   value: 2
   changeDuration: 1
   totalDuration: 2
+  fx: {fileID: 4475211346955312937, guid: 4b1a3d8902238f04d9e40263e6f87320, type: 3}
 --- !u!65 &5035074796290655494
 BoxCollider:
   m_ObjectHideFlags: 0

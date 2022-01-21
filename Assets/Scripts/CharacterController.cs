@@ -10,7 +10,10 @@ public class CharacterController : MonoBehaviour
     public static CharacterController instance { get; private set; }
 
     [SerializeField]
-    private float rotationAngle, rotationSpeed, centeringForce, eatBoneDistance;
+    private float rotationAngle, rotationSpeed, eatBoneDistance, startScale, scaleUpDuration, eatDelay;
+
+    [SerializeField]
+    private Animator animator;
 
     private Rigidbody rb;
 
@@ -18,16 +21,15 @@ public class CharacterController : MonoBehaviour
 
     private Vector3 targetScale;
 
-    private bool caught, finished;
+    private bool caught, finished, eating;
 
     private Vector3 catchTargetPos;
 
-    
+    private Vector3 lastPos;
 
     private void Awake()
     {
         instance = this;
-
     }
 
     private void Start()
@@ -37,6 +39,12 @@ public class CharacterController : MonoBehaviour
         targetScale = transform.localScale;
 
         moveVector = Vector3.forward * CrowdManager.instance.speed;
+
+        transform.localScale = Vector3.one * startScale;
+
+        lastPos = transform.position;
+
+        transform.DOScale(1F, scaleUpDuration);
     }
 
     private void FixedUpdate()
@@ -48,32 +56,40 @@ public class CharacterController : MonoBehaviour
         {
             Move();
 
-            FaceMoveDirection();
-
             CheckDistance();
         } else
         {
             rb.velocity = (catchTargetPos - transform.position);
+            transform.forward = moveVector.normalized;
         }
+    }
+
+    private void LateUpdate()
+    {
+        if(!caught)
+            FaceMoveDirection();
     }
 
     private void Move()
     {
-        var centeringVector = (CrowdManager.instance.furthestCharacter.position - transform.position) * centeringForce;
+        var centeringDisplacement = CrowdManager.instance.furthestCharacter.position - transform.position;
 
-        var bone = BonesController.instance.targetBone;
-
-        if (bone)
+        if (CrowdManager.instance.furthestCharacter == transform)
         {
-            var displacementVector = bone.position - transform.position;
+            var bone = BonesController.instance.targetBone;
 
-            moveVector = displacementVector.normalized * CrowdManager.instance.speed + centeringVector;
+            if (bone)
+            {
+                var displacementVector = bone.position - transform.position;
 
-            if (displacementVector.sqrMagnitude < eatBoneDistance * eatBoneDistance)
-                BonesController.instance.EatFirstBone();
+                moveVector = displacementVector.normalized * CrowdManager.instance.speed;
+
+                if (displacementVector.sqrMagnitude < eatBoneDistance * eatBoneDistance)
+                    BonesController.instance.EatFirstBone();
+            }
         } else
         {
-            moveVector = transform.forward * CrowdManager.instance.speed + centeringVector;
+            moveVector = centeringDisplacement.normalized * CrowdManager.instance.speed;
         }
 
         rb.velocity = rb.velocity.normalized * CrowdManager.instance.speed;
@@ -89,11 +105,27 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    public void Finish()
+    public void Eat(Vector3 targetPos)
+    {
+        eating = true;
+
+        transform.DORotateQuaternion(Quaternion.LookRotation(Finish.instance.transform.position - targetPos, Vector3.up), 0.4F);
+
+        animator.SetTrigger("Eat");
+    }
+
+    public void Sit()
+    {
+        animator.SetTrigger("Sit");
+    }
+
+    public void SetFinish(Vector3 targetPos)
     {
         finished = true;
 
         rb.isKinematic = true;
+
+        DOTween.Sequence().SetDelay(eatDelay).OnComplete(() => Eat(targetPos));
     }
 
     public void MultiplyScale(float value, float changeDuration)
@@ -112,7 +144,12 @@ public class CharacterController : MonoBehaviour
 
     private void FaceMoveDirection()
     {
-        transform.forward = Vector3.Lerp(transform.forward, rb.velocity.normalized, Time.deltaTime * rotationSpeed);
+        if (eating)
+            return;       
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rb.velocity.normalized, Vector3.up), Time.deltaTime * rotationSpeed);
+        //transform.forward = Vector3.Lerp(transform.forward, rb.velocity.normalized, Time.deltaTime * rotationSpeed);
+        lastPos = transform.position;
     }
 
     public void Catch(Vector3 targetPos)

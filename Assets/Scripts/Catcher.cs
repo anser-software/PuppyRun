@@ -7,7 +7,7 @@ public class Catcher : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed, speedPostCatch, postCatchDuration, sampleInterval, goToNextPointDistance, catchDistance, catchDuration;
+    private float speed, speedPostCatch, postCatchDuration, sampleInterval, goToNextPointDistance, catchDistance, catchDuration, surprisedDuration, startChasingDifferenceZ;
 
     [SerializeField]
     private Animator animator;
@@ -24,17 +24,14 @@ public class Catcher : MonoBehaviour
 
     private Vector3 currentTargetPosition;
 
-    private CatcherState CatcherState = CatcherState.Chasing;
+    private CatcherState CatcherState = CatcherState.Waiting;
 
     private void Start()
     {
-        SamplePosition();
-
-        currentTargetPosition = targetPositions.Dequeue();
-
         Finish.instance.OnFinished += OnFinish;
-    }
 
+        GameManager.instance.OnLose += OnLose;
+    }
     private void OnFinish()
     {
         CatcherState = CatcherState.Inactive;
@@ -42,29 +39,41 @@ public class Catcher : MonoBehaviour
         transform.DOScale(Vector3.zero, 1F).OnComplete(() => Destroy(gameObject));
     }
 
+    private void OnLose()
+    {
+        CatcherState = CatcherState.Inactive;
+
+        animator.SetTrigger("Idle");
+    }
+
     private void StartChasing()
     {
-        CatcherState = CatcherState.Chasing;
+        animator.SetTrigger("Surprised");
 
-        Debug.Log("CHASING");
+        CatcherState = CatcherState.Surprised;
+
+        DOTween.Sequence().SetDelay(surprisedDuration).OnComplete(() => CatcherState = CatcherState.Chasing);
     }
 
     private void Update()
     {
         if(CatcherState == CatcherState.Waiting)
         {
-            if ((CrowdManager.instance.nearestCharacter.position - transform.position).sqrMagnitude < catchDistance * catchDistance)
+            if ((CrowdManager.instance.nearestCharacter.position - transform.position).sqrMagnitude < catchDistance * catchDistance * 0.25F)
             {
                 Catch();
             }
 
-            if(CrowdManager.instance.nearestCharacter.position.z > transform.position.z + 4F)
+            if(CrowdManager.instance.nearestCharacter.position.z > transform.position.z + startChasingDifferenceZ)
             {
                 StartChasing();
             }
 
             return;
         }
+
+        if (CatcherState != CatcherState.Chasing && CatcherState != CatcherState.PostCatch)
+            return;
 
         timer -= Time.deltaTime;
 
@@ -74,21 +83,25 @@ public class Catcher : MonoBehaviour
             timer = sampleInterval;
         }
 
-        if (CatcherState != CatcherState.Chasing && CatcherState != CatcherState.PostCatch)
-            return;
+        Move();
+    }
 
+    private void Move()
+    {
         var currentSpeed = CatcherState == CatcherState.PostCatch ? speedPostCatch : speed;
 
         var displacement = currentTargetPosition - transform.position;
+
+        displacement = CrowdManager.instance.furthestCharacter.position - transform.position;
 
         transform.Translate(displacement.normalized * currentSpeed * Time.deltaTime);
 
         if (displacement.sqrMagnitude < goToNextPointDistance * goToNextPointDistance)
             currentTargetPosition = targetPositions.Dequeue();
 
-        transform.forward = Vector3.Lerp(transform.forward, displacement.normalized, Time.deltaTime * 5F);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(displacement.normalized, Vector3.up), Time.deltaTime * 10F);
 
-        if((CrowdManager.instance.nearestCharacter.position - transform.position).sqrMagnitude < catchDistance * catchDistance)
+        if ((CrowdManager.instance.nearestCharacter.position - transform.position).sqrMagnitude < catchDistance * catchDistance)
         {
             Catch();
         }
@@ -115,7 +128,7 @@ public class Catcher : MonoBehaviour
                 Instantiate(catchFX, netCenter.position, Quaternion.identity);
             }
             CrowdManager.instance.RemoveLast();
-        }); ;
+        });
 
         catchSequence.AppendInterval(catchDuration / 2F);
 
@@ -130,7 +143,7 @@ public class Catcher : MonoBehaviour
         {
             if (CatcherState != CatcherState.Inactive)
             {
-                CatcherState = CatcherState.Catching;
+                CatcherState = CatcherState.Chasing;
             }
         });
     }
@@ -140,6 +153,7 @@ public class Catcher : MonoBehaviour
 public enum CatcherState
 {
     Waiting,
+    Surprised,
     Chasing,
     Catching,
     PostCatch,

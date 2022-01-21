@@ -49,6 +49,13 @@ public class CrowdManager : MonoBehaviour
 
     private void Update()
     {
+        if (characters.Count == 0 && GameManager.instance.gameState == GameState.Playing)
+        {
+            Debug.Log("LOSE");
+            GameManager.instance.Lose();
+            return;
+        }
+
         SetAveragePosition();
 
         SetFurthestAndNearestPositions();
@@ -168,6 +175,8 @@ public class CrowdManager : MonoBehaviour
 
     public void FreezeCharacter(CharacterController character, Vector3 targetPos)
     {
+        character.Sit();
+
         characters.Remove(character);
 
         character.Catch(targetPos);
@@ -213,9 +222,8 @@ public class CrowdManager : MonoBehaviour
 
         for (int i = 0; i < charactersOrdered.Length; i++)
         {
-            charactersOrdered[i].transform.DOMove(targetPositionsOrdered[i], 1F);
-            charactersOrdered[i].transform.DORotateQuaternion(Quaternion.LookRotation(Finish.instance.transform.position - targetPositionsOrdered[i], Vector3.up), 1F);
-            charactersOrdered[i].Finish();
+            charactersOrdered[i].transform.DOMove(targetPositionsOrdered[i], Vector3.Distance(charactersOrdered[i].transform.position, targetPositionsOrdered[i]) / speed).SetEase(Ease.Linear);
+            charactersOrdered[i].SetFinish(targetPositionsOrdered[i]);
         }
     }
 
