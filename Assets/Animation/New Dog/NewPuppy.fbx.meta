@@ -7,6 +7,12 @@ ModelImporter:
       74: -3584619823844665163
     second: metarig|Action
   - first:
+      74: -7079218833480922270
+    second: metarig|Action.001
+  - first:
+      74: -2463781497245029270
+    second: metarig|metarigAction.001
+  - first:
       74: -7536546058115350168
     second: metarig|metarigAction.002
   externalObjects:
