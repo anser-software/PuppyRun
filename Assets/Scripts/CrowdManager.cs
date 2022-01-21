@@ -19,7 +19,7 @@ public class CrowdManager : MonoBehaviour
     public float maxDistanceToFurthest;
 
     [SerializeField]
-    private GameObject characterPrefab, removeCharacterFX;
+    private GameObject characterPrefab, removeCharacterFX, speedUpFX;
 
     [SerializeField]
     private bool modifyDefaultSpeed;
@@ -67,9 +67,12 @@ public class CrowdManager : MonoBehaviour
 
         seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
 
-        foreach (var character in characters)
+
+        if (speedUpFX)
         {
-            character.SpeedUpFX(totalDuration);
+            speedUpFX.SetActive(true);
+
+            DOTween.Sequence().SetDelay(totalDuration).OnComplete(() => speedUpFX.SetActive(false));
         }
     }
 
@@ -87,9 +90,11 @@ public class CrowdManager : MonoBehaviour
 
         seq.Append(DOTween.To(() => speed, x => speed = x, defaultSpeed, changeDuration).SetId("RESET").OnComplete(() => targetSpeed = defaultSpeed));
 
-        foreach (var character in characters)
+        if (speedUpFX)
         {
-            character.SpeedUpFX(totalDuration);
+            speedUpFX.SetActive(true);
+
+            DOTween.Sequence().SetDelay(totalDuration).OnComplete(() => speedUpFX.SetActive(false));
         }
     }
 
