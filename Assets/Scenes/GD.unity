@@ -24977,8 +24977,16 @@ PrefabInstance:
       value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
+      propertyPath: turnDifferenceZ
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
       propertyPath: postCatchDuration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
+      propertyPath: startChasingDifferenceZ
+      value: -12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
