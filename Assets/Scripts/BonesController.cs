@@ -21,7 +21,7 @@ public class BonesController : MonoBehaviour
 
     public int maxBoneCount;
 
-    public float distanceBetweenBones;
+    public float distanceBetweenBones, minDrawingDistance;
 
     private bool isDrawing = false;
 
@@ -53,7 +53,7 @@ public class BonesController : MonoBehaviour
 
     private void StartDrawing()
     {
-        if (!InputManager.Instance.validWorldPos || InputManager.Instance.mouseWorldPosition.z <= CrowdManager.instance.furthestCharacter.position.z)
+        if (!InputManager.Instance.validWorldPos || InputManager.Instance.mouseWorldPosition.z <= CrowdManager.instance.furthestCharacter.position.z + minDrawingDistance)
         {
             return;
         }

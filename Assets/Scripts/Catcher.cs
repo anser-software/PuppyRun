@@ -125,7 +125,7 @@ public class Catcher : MonoBehaviour
         catchSequence.AppendCallback(() => {
             if(catchFX)
             {
-                Instantiate(catchFX, netCenter.position, Quaternion.identity);
+                Instantiate(catchFX, CrowdManager.instance.nearestCharacter.position, Quaternion.identity);
             }
             CrowdManager.instance.RemoveLast();
         });

@@ -47,3 +47,4 @@ MonoBehaviour:
   boneOffset: {x: 0, y: 0.1, z: 0}
   maxBoneCount: 10
   distanceBetweenBones: 1
+  minDrawingDistance: 1
