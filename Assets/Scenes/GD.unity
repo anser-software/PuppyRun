@@ -24985,6 +24985,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
+      propertyPath: surprisedDuration
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451794316311381146, guid: aaf8f5a862278c043979eaaf79d057f7, type: 3}
       propertyPath: startChasingDifferenceZ
       value: -12
       objectReference: {fileID: 0}
@@ -25074,9 +25078,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6011421009680838279, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6616697098773016291, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731222170282418693, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6969707256344850531, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
       propertyPath: m_Pivot.x

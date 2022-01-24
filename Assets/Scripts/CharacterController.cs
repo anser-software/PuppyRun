@@ -25,7 +25,7 @@ public class CharacterController : MonoBehaviour
 
     private Vector3 catchTargetPos;
 
-    private Vector3 lastPos;
+    private bool running;
 
     private void Awake()
     {
@@ -42,14 +42,27 @@ public class CharacterController : MonoBehaviour
 
         transform.localScale = Vector3.one * startScale;
 
-        lastPos = transform.position;
-
         transform.DOScale(1F, scaleUpDuration);
+
+        if(CrowdManager.instance.characters.Count > 1)
+        {
+            running = true;
+        }
+        else
+        {
+            Sit();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (finished)
+        if (Input.GetMouseButtonDown(0))
+        {
+            running = true;
+            animator.SetTrigger("Run");
+        }
+
+        if (finished || !running)
             return;
 
         if (!caught)
@@ -66,7 +79,7 @@ public class CharacterController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(!caught)
+        if(!caught && running)
             FaceMoveDirection();
     }
 
@@ -149,7 +162,6 @@ public class CharacterController : MonoBehaviour
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rb.velocity.normalized, Vector3.up), Time.deltaTime * rotationSpeed);
         //transform.forward = Vector3.Lerp(transform.forward, rb.velocity.normalized, Time.deltaTime * rotationSpeed);
-        lastPos = transform.position;
     }
 
     public void Catch(Vector3 targetPos)

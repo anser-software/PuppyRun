@@ -6,21 +6,31 @@ public class UIManager : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject win, lose;
+    private GameObject start, win, lose;
 
     [SerializeField]
-    private Text characterCount, multiplier;
+    private Text characterCounter, multiplier, levelCounter;
 
     private void Start()
     {
         GameManager.instance.OnWin += OnWin;
 
         GameManager.instance.OnLose += OnLose;
+
+        levelCounter.text = string.Format(levelCounter.text, PlayerPrefs.GetInt("Level", 1).ToString());
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            start.SetActive(false);
+        }
     }
 
     private void OnWin()
     {
-        characterCount.text = CrowdManager.instance.characters.Count.ToString();
+        characterCounter.text = CrowdManager.instance.characters.Count.ToString();
 
         multiplier.text = string.Format(multiplier.text, Mathf.CeilToInt(CrowdManager.instance.characters.Count * GameManager.instance.characterCountMultiplierForScore).ToString());
 
