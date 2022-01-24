@@ -7,7 +7,8 @@ public class Catcher : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed, speedPostCatch, postCatchDuration, sampleInterval, goToNextPointDistance, catchDistance, catchDuration, surprisedDuration, startChasingDifferenceZ;
+    private float speed, speedPostCatch, postCatchDuration, sampleInterval,
+        goToNextPointDistance, catchDistance, catchDuration, surprisedDuration, startChasingDifferenceZ, turnDifferenceZ;
 
     [SerializeField]
     private Animator animator;
@@ -90,14 +91,15 @@ public class Catcher : MonoBehaviour
     {
         var currentSpeed = CatcherState == CatcherState.PostCatch ? speedPostCatch : speed;
 
-        var displacement = currentTargetPosition - transform.position;
+        var displacement = CrowdManager.instance.furthestCharacter.position - transform.position;
 
-        displacement = CrowdManager.instance.furthestCharacter.position - transform.position;
+        if (displacement.z < turnDifferenceZ)
+            displacement = Vector3.back;
 
-        transform.Translate(displacement.normalized * currentSpeed * Time.deltaTime);
+        transform.Translate(displacement.normalized * currentSpeed * Time.deltaTime, Space.World);
 
-        if (displacement.sqrMagnitude < goToNextPointDistance * goToNextPointDistance)
-            currentTargetPosition = targetPositions.Dequeue();
+        //if (displacement.sqrMagnitude < goToNextPointDistance * goToNextPointDistance)
+        //    currentTargetPosition = targetPositions.Dequeue();
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(displacement.normalized, Vector3.up), Time.deltaTime * 10F);
 
