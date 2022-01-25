@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.Finished;
 
+        PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level", 1) + 1);
+
         OnWin?.Invoke();
     }
 
