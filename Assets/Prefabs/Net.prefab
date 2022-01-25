@@ -85,6 +85,7 @@ MonoBehaviour:
   netShadow: {fileID: 1850379636029196427}
   shadowMinScale: {x: 4, y: 6, z: 1}
   shadowMaxScale: {x: 11, y: 14, z: 1}
+  catchFX: {fileID: 8491644083434488594, guid: 2310a939bb0f67244b27239cd44519ad, type: 3}
 --- !u!1 &7366729750793352561
 GameObject:
   m_ObjectHideFlags: 0

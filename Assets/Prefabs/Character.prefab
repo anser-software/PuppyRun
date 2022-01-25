@@ -82,7 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b31ab9d941050c4093bf0226e0e62b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  running: 0
   rotationAngle: -70
   rotationSpeed: 17
   eatBoneDistance: 1.7
@@ -100,10 +99,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
+  m_Radius: 0.28874397
   m_Height: 1
   m_Direction: 2
-  m_Center: {x: 0, y: 0.3, z: -0.2}
+  m_Center: {x: -0.0018515587, y: 0.3, z: -0.19999999}
 --- !u!1 &5733938183400506593
 GameObject:
   m_ObjectHideFlags: 0

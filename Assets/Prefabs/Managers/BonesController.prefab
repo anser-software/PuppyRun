@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonePrefab: {fileID: 3230540925993261234, guid: e13f37763593ba640b2038d43975bf08, type: 3}
   boneOffset: {x: 0, y: 0.1, z: 0}
-  maxBoneCount: 10
+  maxBoneCount: 15
   distanceBetweenBones: 1
-  minDrawingDistance: 1
+  minDrawingDistance: 3

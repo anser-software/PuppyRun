@@ -46,6 +46,7 @@ MonoBehaviour:
   maxDistanceToFurthest: 7
   characterPrefab: {fileID: 4601248200661626050, guid: 1da8d62bb41838a4fb6ef86489c86ca7, type: 3}
   removeCharacterFX: {fileID: 0}
+  speedUpFX: {fileID: 0}
   modifyDefaultSpeed: 1
-  defaultSpeed: 5
+  defaultSpeed: 4
   immunityDuration: 1.25
