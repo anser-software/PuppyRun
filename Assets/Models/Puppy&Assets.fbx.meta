@@ -16,32 +16,12 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 844a10b935e1a984c8b5cc5da42c4411, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 844a10b935e1a984c8b5cc5da42c4411, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: first
-    second: {fileID: 2100000, guid: 844a10b935e1a984c8b5cc5da42c4411, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: main
     second: {fileID: 2100000, guid: edc632af5cba8db489e238d384bedafa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: second
-    second: {fileID: 2100000, guid: 844a10b935e1a984c8b5cc5da42c4411, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 2
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
