@@ -49,6 +49,16 @@ public class BonesController : MonoBehaviour
         {
             StopDrawing();
         }
+
+        if(currentBones.Count > 0)
+        {
+            if(currentBones[0].position.z < CrowdManager.instance.furthestCharacter.position.z)
+            {
+                Destroy(currentBones[0].gameObject);
+
+                currentBones.RemoveAt(0);
+            } 
+        }
     }
 
     private void StartDrawing()

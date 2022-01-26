@@ -50,7 +50,7 @@ public class Finish : MonoBehaviour
 
             var angle = (initialOffset + gapBetweenCharacters * i + circle * offsetPerCircle) * Mathf.PI * 2F;
 
-            targetPositions[i] = transform.position + new Vector3(Mathf.Cos(angle), 0F, Mathf.Sin(angle)) * bowlRadius;
+            targetPositions[i] = transform.position + new Vector3(Mathf.Cos(angle), 0F, -Mathf.Abs(Mathf.Sin(angle))) * bowlRadius;
         }
 
         return targetPositions;
