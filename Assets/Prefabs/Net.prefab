@@ -75,8 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fcb7a284eb64548a58eec971f498ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitInterval: 0.2
-  hitDuration: 0.5
+  hitInterval: 0.4
+  hitDuration: 0.7
   releaseDuration: 1
   hitAngle: 85
   catchRadius: 0.5
