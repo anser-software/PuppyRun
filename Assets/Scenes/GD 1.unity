@@ -16209,7 +16209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4690919179914283061, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
       propertyPath: minDrawingDistance
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 806922283d23d1c4f899a4d18e3838a7, type: 3}
@@ -24026,11 +24026,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3807596552749478085, guid: a62bbbedd56ae99419fd2c8f269ba4fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.13
+      value: 3.61
       objectReference: {fileID: 0}
     - target: {fileID: 3807596552749478085, guid: a62bbbedd56ae99419fd2c8f269ba4fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 86.53
+      value: 86.22
       objectReference: {fileID: 0}
     - target: {fileID: 3807596552749478085, guid: a62bbbedd56ae99419fd2c8f269ba4fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24938,7 +24938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2489705818183518860, guid: cae870f1e413bf046a8a4980085a9477, type: 3}
       propertyPath: changeInHeightPerCharacter
-      value: -0.05
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 3346824185708860340, guid: cae870f1e413bf046a8a4980085a9477, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -25106,6 +25106,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6616697098773016291, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731222170282418693, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6969707256344850531, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -25188,6 +25196,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6969707256344850531, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022319234736143629, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chosenEffect: {fileID: 152564, guid: 0e4a7fa9fd28f154b91c98ee6fe8ebea, type: 3}
-  loopTimeLimit: 1.25
-  spawnWithoutLight: 0
-  spawnWithoutSound: 0
+  loopTimeLimit: 0.5
+  spawnWithoutLight: 1
+  spawnWithoutSound: 1
 --- !u!182 &6037556171526250428
 WindZone:
   m_ObjectHideFlags: 0
