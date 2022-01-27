@@ -25190,6 +25190,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7357238342326563140, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: showTutorialFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357238342326563140, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
+      propertyPath: characterZForTutorialFood
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
 --- !u!23 &5118256974681321028
