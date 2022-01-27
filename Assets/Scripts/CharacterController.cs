@@ -136,6 +136,8 @@ public class CharacterController : MonoBehaviour
 
     public void Sit()
     {
+        if (finished)
+            return;
         Debug.Log("SIT");
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

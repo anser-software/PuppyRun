@@ -19,6 +19,9 @@ public class Finish : MonoBehaviour
     [SerializeField] [Range(-1F, 1F)]
     private float gapBetweenCharacters, initialOffset, offsetPerCircle;
 
+    [SerializeField]
+    private GameObject confetti;
+
     private bool activated;
 
     private void Awake()
@@ -36,6 +39,8 @@ public class Finish : MonoBehaviour
         CrowdManager.instance.ActivateFinish();
 
         DOTween.Sequence().SetDelay(startEatingDelay).OnComplete(() => StartEating(CrowdManager.instance.characters.Count));
+
+        confetti.SetActive(true);
 
         OnFinished?.Invoke();
     }
