@@ -31257,7 +31257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2489705818183518860, guid: cae870f1e413bf046a8a4980085a9477, type: 3}
       propertyPath: changeInHeightPerCharacter
-      value: -0.05
+      value: -0.035
       objectReference: {fileID: 0}
     - target: {fileID: 3346824185708860340, guid: cae870f1e413bf046a8a4980085a9477, type: 3}
       propertyPath: m_Materials.Array.data[0]
