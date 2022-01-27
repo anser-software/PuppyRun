@@ -146,7 +146,9 @@ public class CrowdManager : MonoBehaviour
 
     public void AddCharacter()
     {
-        var character = Instantiate(characterPrefab, averagePos, Quaternion.identity);
+        var offset = Random.insideUnitCircle;
+
+        var character = Instantiate(characterPrefab, averagePos + new Vector3(offset.x, 0F, offset.y), Quaternion.identity);
 
         characters.Add(character.GetComponent<CharacterController>());
 

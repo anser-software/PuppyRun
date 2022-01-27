@@ -44,7 +44,7 @@ public class CharacterController : MonoBehaviour
 
         transform.DOScale(1F, scaleUpDuration);
 
-        if(CrowdManager.instance.characters.Count > 1)
+        if(BonesController.instance.currentBones.Count > 0)
         {
             running = true;
         }
@@ -56,13 +56,20 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (finished)
+            return;
+
+        if (BonesController.instance.currentBones.Count > 0 && !running)
         {
             running = true;
             animator.SetTrigger("Run");
         }
+        else if(BonesController.instance.currentBones.Count < 1 && running)
+        {
+            Sit();
+        }
 
-        if (finished || !running)
+        if (!running)
             return;
 
         if (!caught)
@@ -129,6 +136,10 @@ public class CharacterController : MonoBehaviour
 
     public void Sit()
     {
+        Debug.Log("SIT");
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        running = false;
         animator.SetTrigger("Sit");
     }
 

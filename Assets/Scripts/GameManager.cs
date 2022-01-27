@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using HomaGames.HomaBelly;
 public class GameManager : MonoBehaviour
 {
     
@@ -16,11 +17,19 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        PlayerPrefs.SetInt("Scene", SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void Start()
+    {
+        DefaultAnalytics.LevelStarted(PlayerPrefs.GetInt("Scene") + 1);
     }
 
     public void Win()
     {
         gameState = GameState.Finished;
+        DefaultAnalytics.LevelCompleted();
 
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level", 1) + 1);
 
@@ -30,6 +39,7 @@ public class GameManager : MonoBehaviour
     public void Lose()
     {
         gameState = GameState.Finished;
+        DefaultAnalytics.LevelFailed();
 
         OnLose?.Invoke();
     }
@@ -44,7 +54,7 @@ public class GameManager : MonoBehaviour
         var level = SceneManager.GetActiveScene().buildIndex + 1;
 
         if (level >= SceneManager.sceneCountInBuildSettings)
-            level = 0;
+            level = 1;
 
         SceneManager.LoadScene(level);
     }

@@ -35,15 +35,30 @@ public class InputManager : MonoBehaviour
         SetMouseWorldPos(mouseViewportPosition);
     }
 
-    private void Update()
+    public Vector3 GetWorldPos(Vector3 screenPos)
     {
-        mouseViewportPosition = new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, Input.mousePosition.z);
+        mouseViewportPosition = new Vector3(screenPos.x / Screen.width, screenPos.y / Screen.height, screenPos.z);
 
         mouseViewportPositionDelta = mouseViewportPosition - lastViewportMousePos;
 
         lastViewportMousePos = mouseViewportPosition;
 
-        SetMouseWorldPos(mouseViewportPosition);
+        if (Physics.Raycast(mainCam.ViewportPointToRay(mouseViewportPosition), out RaycastHit hitInfo, Mathf.Infinity, mouseRaycastTarget.value))
+        {
+            mouseWorldPosition = hitInfo.point;
+
+            mouseWorldPositionDelta = mouseWorldPosition - lastWorldMousePos;
+
+            lastWorldMousePos = mouseWorldPosition;
+
+            validWorldPos = true;
+        }
+        else
+        {
+            validWorldPos = false;
+        }
+
+        return mouseWorldPosition;
     }
 
     private void SetMouseWorldPos(Vector3 mouseViewportPos)

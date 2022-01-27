@@ -63,7 +63,11 @@ public class BonesController : MonoBehaviour
 
     private void StartDrawing()
     {
-        if (!InputManager.Instance.validWorldPos || InputManager.Instance.mouseWorldPosition.z <= CrowdManager.instance.furthestCharacter.position.z + minDrawingDistance)
+        var screenPos = Input.mousePosition;
+
+        var worldPos = InputManager.Instance.GetWorldPos(screenPos);
+
+        if (!InputManager.Instance.validWorldPos || worldPos.z <= CrowdManager.instance.furthestCharacter.position.z + minDrawingDistance)
         {
             return;
         }
@@ -72,7 +76,7 @@ public class BonesController : MonoBehaviour
 
         ClearBones();
 
-        var bone = Instantiate(bonePrefab, InputManager.Instance.mouseWorldPosition + boneOffset, Quaternion.identity);
+        var bone = Instantiate(bonePrefab, worldPos + boneOffset, Quaternion.identity);
 
         //bone.transform.forward = (currentBones[currentBones.Count - 1].position - bone.transform.position).normalized;
 
@@ -94,13 +98,17 @@ public class BonesController : MonoBehaviour
         if (!isDrawing || currentBones.Count < 1)
             return;
 
-        if (!InputManager.Instance.validWorldPos || InputManager.Instance.mouseWorldPosition.z <= CrowdManager.instance.furthestCharacter.position.z)
+        var screenPos = Input.mousePosition;
+
+        var worldPos = InputManager.Instance.GetWorldPos(screenPos);
+
+        if (!InputManager.Instance.validWorldPos || worldPos.z <= CrowdManager.instance.furthestCharacter.position.z)
         {
             StopDrawing();
             return;
         }
 
-        var displacement = InputManager.Instance.mouseWorldPosition + boneOffset - currentBones[currentBones.Count - 1].position;
+        var displacement = worldPos + boneOffset - currentBones[currentBones.Count - 1].position;
 
         if (displacement.z < 0F)
             return;

@@ -6,10 +6,22 @@ public class UIManager : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject start, win, lose;
+    private GameObject start, win, lose, tutorialFood;
+
+    [SerializeField]
+    private bool showTutorialFood;
+
+    [SerializeField]
+    private float characterZForTutorialFood;
 
     [SerializeField]
     private Text characterCounter, multiplier, levelCounter;
+
+    [SerializeField]
+    private Animation hand;
+
+    [SerializeField, Range(0F, 1F)]
+    private float handAnimSpeed;
 
     private void Start()
     {
@@ -18,6 +30,15 @@ public class UIManager : MonoBehaviour
         GameManager.instance.OnLose += OnLose;
 
         levelCounter.text = string.Format(levelCounter.text, PlayerPrefs.GetInt("Level", 1).ToString());
+
+        hand["UIHand"].speed = handAnimSpeed;
+    }
+
+    private void ShowTutorialFood()
+    {
+        tutorialFood.SetActive(true);
+
+        Time.timeScale = 0F;
     }
 
     private void Update()
@@ -25,7 +46,20 @@ public class UIManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             start.SetActive(false);
+            tutorialFood.SetActive(false);
+            Time.timeScale = 1F;
         }
+
+        if(showTutorialFood)
+        {
+            if(CrowdManager.instance.furthestCharacter.position.z > characterZForTutorialFood)
+            {
+                ShowTutorialFood();
+
+                showTutorialFood = false;
+            }
+        }
+
     }
 
     private void OnWin()

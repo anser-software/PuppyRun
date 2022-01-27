@@ -101,7 +101,7 @@ public class Catcher : MonoBehaviour
         //if (displacement.sqrMagnitude < goToNextPointDistance * goToNextPointDistance)
         //    currentTargetPosition = targetPositions.Dequeue();
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(displacement.normalized, Vector3.up), Time.deltaTime * 10F);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(displacement.normalized, Vector3.up), Time.deltaTime * 5F);
 
         if ((CrowdManager.instance.nearestCharacter.position - transform.position).sqrMagnitude < catchDistance * catchDistance)
         {
