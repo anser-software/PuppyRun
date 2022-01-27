@@ -29,11 +29,19 @@ public class BonesController : MonoBehaviour
     {
         instance = this;
 
-        Finish.instance.OnFinished += ClearBones;
+        Finish.instance.OnFinished += () =>
+        {
+            finished = true;
+            ClearBones();
+        };
     }
 
     private void Update()
     {
+        if (finished)
+            return;
+
+
         if(Input.GetMouseButtonDown(0))
         {
             StartDrawing();
@@ -82,6 +90,8 @@ public class BonesController : MonoBehaviour
 
         currentBones.Add(bone.transform);
     }
+
+    private bool finished;
 
     public void ClearBones()
     {

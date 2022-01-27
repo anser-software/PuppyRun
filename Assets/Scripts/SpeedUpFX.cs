@@ -15,8 +15,13 @@ public class SpeedUpFX : MonoBehaviour
     {
         transform.localScale = Vector3.one * CrowdManager.instance.characters.Count * scaleFactor;
 
-        var targetPos = CrowdManager.instance.furthestCharacter.position + offset;
+        var furthest = CrowdManager.instance.furthestCharacter;
+
+        var targetPos = CrowdManager.instance.furthestCharacter.position + furthest.right * offset.x + furthest.up * offset.y + furthest.forward * offset.z;
 
         transform.position = targetPos;
+
+        if(CrowdManager.instance.characters.Count > 0)
+            transform.forward = furthest.forward;
     }
 }

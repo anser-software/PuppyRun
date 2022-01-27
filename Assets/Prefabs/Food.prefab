@@ -126,4 +126,4 @@ MonoBehaviour:
   value: 3
   changeDuration: 0.1
   totalDuration: 0.7
-  fx: {fileID: 3951391759493940205, guid: 7dc323afd5846ef4a994703f36885224, type: 3}
+  fx: {fileID: 0}
