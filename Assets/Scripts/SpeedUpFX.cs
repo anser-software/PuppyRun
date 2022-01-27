@@ -7,11 +7,15 @@ public class SpeedUpFX : MonoBehaviour
 
     [SerializeField]
     private Vector3 offset;
+
+    [SerializeField]
+    private float scaleFactor;
+
     private void Update()
     {
-        var targetPos = CrowdManager.instance.furthestCharacter.position + offset;
+        transform.localScale = Vector3.one * CrowdManager.instance.characters.Count * scaleFactor;
 
-        targetPos.x = 0F;
+        var targetPos = CrowdManager.instance.furthestCharacter.position + offset;
 
         transform.position = targetPos;
     }

@@ -25106,14 +25106,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6616697098773016291, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6731222170282418693, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6969707256344850531, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -25197,18 +25189,6 @@ PrefabInstance:
     - target: {fileID: 6969707256344850531, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7357238342326563140, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
-      propertyPath: showTutorialFood
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7357238342326563140, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
-      propertyPath: characterZForTutorialFood
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022319234736143629, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb6e1e866adf2745a75db3483ae6c84, type: 3}
