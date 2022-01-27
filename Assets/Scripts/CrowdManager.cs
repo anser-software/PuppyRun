@@ -19,6 +19,9 @@ public class CrowdManager : MonoBehaviour
     public float maxDistanceToFurthest;
 
     [SerializeField]
+    private int maxCharactersOnFinish;
+
+    [SerializeField]
     private GameObject characterPrefab, removeCharacterFX, speedUpFX;
 
     [SerializeField]
@@ -138,7 +141,8 @@ public class CrowdManager : MonoBehaviour
 
         foreach (var c in characters)
         {
-            avgPos += c.transform.position;
+            if(c)
+                avgPos += c.transform.position;
         }
 
         averagePos = avgPos / characters.Count;
@@ -222,10 +226,23 @@ public class CrowdManager : MonoBehaviour
 
         var charactersOrdered = characters.OrderByDescending(c => c.transform.position.z).ToArray();
 
+        var charactersToSpawn = Mathf.Min(maxCharactersOnFinish, charactersOrdered.Length);
+
         for (int i = 0; i < charactersOrdered.Length; i++)
         {
-            charactersOrdered[i].transform.DOMove(targetPositionsOrdered[i], Vector3.Distance(charactersOrdered[i].transform.position, targetPositionsOrdered[i]) / speed).SetEase(Ease.Linear);
-            charactersOrdered[i].SetFinish(targetPositionsOrdered[i]);
+            if (i < charactersToSpawn)
+            {
+                charactersOrdered[i].transform.DOMove(targetPositionsOrdered[i], Vector3.Distance(charactersOrdered[i].transform.position, targetPositionsOrdered[i]) / speed).SetEase(Ease.Linear);
+                charactersOrdered[i].SetFinish(targetPositionsOrdered[i]);
+            } else
+            {
+                var character = charactersOrdered[i];
+                charactersOrdered[i].transform.DOScale(0F, 1F).OnComplete(() =>
+                {
+                    Destroy(character.gameObject);
+                    //characters.Remove(character);
+                });
+            }
         }
     }
 

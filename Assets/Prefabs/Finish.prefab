@@ -318,11 +318,11 @@ MonoBehaviour:
   foodPile: {fileID: 3096854991087172421}
   startEatingDelay: 1
   eatDuration: 5
-  changeInHeightPerCharacter: -0.2
+  changeInHeightPerCharacter: -0.05
   bowlRadius: 2
-  gapBetweenCharacters: 0.04
+  gapBetweenCharacters: 0.15
   initialOffset: -0.5
-  offsetPerCircle: 0.04
+  offsetPerCircle: 0
 --- !u!1001 &893722984053551658
 PrefabInstance:
   m_ObjectHideFlags: 0
