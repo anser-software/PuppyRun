@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
 
     private bool active = true;
 
-    private void Start()
+    private void OnEnable()
     {
         offset = transform.position - CrowdManager.instance.furthestCharacter.position;
 
