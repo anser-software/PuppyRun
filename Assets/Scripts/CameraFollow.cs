@@ -14,8 +14,18 @@ public class CameraFollow : MonoBehaviour
 
     private bool active = true;
 
+    private bool initialized;
+
+    private void Start() 
+    {
+        OnEnable();
+    }
+
     private void OnEnable()
     {
+        if(CrowdManager.instance == null)
+            return;
+
         offset = transform.position - CrowdManager.instance.furthestCharacter.position;
 
         maxZ = CrowdManager.instance.furthestCharacter.position.z;
